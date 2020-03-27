@@ -33,6 +33,7 @@
 		F6EB2B9F242DFAEE00C43BF1 /* ThirdCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB2B9E242DFAEE00C43BF1 /* ThirdCoordinator.swift */; };
 		F6EB2BA3242DFBD300C43BF1 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB2BA2242DFBD300C43BF1 /* FavoriteViewModel.swift */; };
 		F6EB2BA5242DFBE100C43BF1 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB2BA4242DFBE100C43BF1 /* FavoriteViewController.swift */; };
+		F6EB2BA7242E0B4C00C43BF1 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB2BA6242E0B4C00C43BF1 /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		F6EB2B9E242DFAEE00C43BF1 /* ThirdCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdCoordinator.swift; sourceTree = "<group>"; };
 		F6EB2BA2242DFBD300C43BF1 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		F6EB2BA4242DFBE100C43BF1 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		F6EB2BA6242E0B4C00C43BF1 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				F6D76E11241BBCCE0055C70D /* AppCoordinator.swift */,
+				F6EB2BA6242E0B4C00C43BF1 /* MainCoordinator.swift */,
 				F6DD6189242A74B0008E757C /* CoordinatorProtocol.swift */,
 				F6D76E27241BC22D0055C70D /* Screens.swift */,
 				F6D76E2D241BC3E00055C70D /* SelectCoordinator.swift */,
@@ -361,6 +364,7 @@
 				F6D76E26241BC12E0055C70D /* Token.swift in Sources */,
 				F6D76E35241BCB460055C70D /* Alert.swift in Sources */,
 				F6EB2BA3242DFBD300C43BF1 /* FavoriteViewModel.swift in Sources */,
+				F6EB2BA7242E0B4C00C43BF1 /* MainCoordinator.swift in Sources */,
 				F6D76E22241BC1050055C70D /* HTTPEngine.swift in Sources */,
 				F6D76E20241BC0AB0055C70D /* ListViewController.swift in Sources */,
 				F6EB2B9F242DFAEE00C43BF1 /* ThirdCoordinator.swift in Sources */,

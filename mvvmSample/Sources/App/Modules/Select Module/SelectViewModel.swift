@@ -8,6 +8,10 @@
 
 import Foundation
 
+struct QuoteItem {
+    let quote: String
+}
+
 protocol SelectViewModelDelegate: class {
     func displayAlert(for type: AlertType)
 }
@@ -20,11 +24,11 @@ final class SelectViewModel {
 
     private weak var delegate: SelectViewModelDelegate?
 
-    private var visibleQuote: [String] = [] {
+    private var visibleQuote: [QuoteItem] = [] {
         didSet {
             DispatchQueue.main.async {
-                guard self.visibleQuote != [] else { self.delegate?.displayAlert(for: .errorService); return}
-                self.quoteLabel?(self.visibleQuote)
+                guard !self.visibleQuote.isEmpty else { self.delegate?.displayAlert(for: .errorService); return}
+                self.quoteItem?(self.visibleQuote)
             }
         }
     }
@@ -44,7 +48,9 @@ final class SelectViewModel {
 
     var quoteButtonText: ((String) -> Void)?
 
-    var quoteLabel: (([String]) -> Void)?
+    var quoteItem: (([QuoteItem]) -> Void)?
+
+    var heartText: ((String) -> Void)?
 
     var isLoading: ((Bool) -> Void)?
     
@@ -54,6 +60,7 @@ final class SelectViewModel {
         titleText?("What's the quote of the day ?")
         navBarTitle?("Select a quote")
         quoteButtonText?("Get quote")
+        heartText?("Add this quote in my favorite")
     }
 
     // MARK: - Private Functions
@@ -64,7 +71,7 @@ final class SelectViewModel {
             self.isLoading?(false)
             switch quote {
             case .success(value: let quoteItem):
-                self.visibleQuote = [quoteItem.quote]
+                self.initializeWeather(quoteItem: quoteItem)
             case .error:
                 self.delegate?.displayAlert(for: .errorService)
             }
@@ -72,5 +79,12 @@ final class SelectViewModel {
             self?.delegate?.displayAlert(for: .errorService)
             return
         })
+    }
+
+    // MARK: - Private Functions
+
+    private func initializeWeather(quoteItem: Quote) {
+        let structVisibleQuote = QuoteItem(quote: quoteItem.quote)
+        self.visibleQuote = [structVisibleQuote]
     }
 }

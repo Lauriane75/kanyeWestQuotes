@@ -22,14 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = .red
 
         let client = HTTPClient()
-
         let stack = CoreDataStack(modelName: "mvvmSample",
                                   type: .prod)
         context = Context(client: client, stack: stack)
         let screens = Screens(context: context)
+        let mainCoordinator = MainCoordinator(screens: screens)
+
         appCoordinator = AppCoordinator(appDelegate: self,
                                         context: context,
-                                        screens: screens)
+                                        screens: screens, mainCoordinator: mainCoordinator)
         appCoordinator?.start()
         return true
     }

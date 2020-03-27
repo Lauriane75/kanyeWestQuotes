@@ -18,14 +18,15 @@ class AppCoordinator: CoordinatorProtocol {
 
     private var screens: Screens
 
-    var coordinators: [CoordinatorProtocol] = []
+    private var mainCoordinator: MainCoordinator
 
     // MARK: - Initializer
 
-    init(appDelegate: AppDelegate, context: Context, screens: Screens) {
+    init(appDelegate: AppDelegate, context: Context, screens: Screens, mainCoordinator: MainCoordinator) {
         self.appDelegate = appDelegate
         self.context = context
         self.screens = screens
+        self.mainCoordinator = mainCoordinator
     }
 }
 
@@ -36,7 +37,7 @@ extension AppCoordinator {
     // MARK: - Start
 
     func start() {
-        let tabBarController = UITabBarController()
+        let tabBarController = mainCoordinator.tabBarController
 
         appDelegate.window = UIWindow(frame: UIScreen.main.bounds)
         appDelegate.window!.rootViewController = tabBarController
@@ -47,44 +48,7 @@ extension AppCoordinator {
         if ProcessInfo.processInfo.environment["IS_RUNNING_UNIT_TESTS"] == "YES" {
             return
         }
-        createTabBar(tabBarController)
-    }
-}
-
-
-// MARK: - Creating tabs
-
-extension AppCoordinator {
-
-    fileprivate func createTabBar(_ tabBarController: UITabBarController) {
-        let selectItem = createNavigationController(withTitle: "Select", image: UIImage(systemName: "star")!)
-        let listItem = createNavigationController(withTitle: "List", image: UIImage(systemName: "heart")!)
-        let favoriteItem = createNavigationController(withTitle: "Favorite", image: UIImage(systemName: "heart")!)
-
-
-        let firstCoordinator = SelectCoordinator(presenter: selectItem, screens: screens)
-        coordinators.append(firstCoordinator)
-        firstCoordinator.start()
-
-        let secondCoordinator = ListCoordinator(presenter: listItem, screens: screens)
-        coordinators.append(secondCoordinator)
-        secondCoordinator.start()
-
-        let thirdCoordinator = FavoriteCoordinator(presenter: favoriteItem, screens: screens)
-        coordinators.append(thirdCoordinator)
-        thirdCoordinator.start()
-
-        let rootViewControllers = [selectItem, listItem, favoriteItem]
-        tabBarController.setViewControllers(rootViewControllers, animated: false)
-    }
-
-    func createNavigationController(withTitle title: String, image: UIImage) -> UINavigationController {
-        let navController = UINavigationController()
-        navController.navigationBar.isTranslucent = false
-
-        navController.tabBarItem = UITabBarItem(title: title, image: image, selectedImage: nil)
-
-        return navController
+        mainCoordinator.createTabBar(tabBarController)
     }
 }
 

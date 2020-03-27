@@ -48,8 +48,11 @@ class SelectViewController: UIViewController {
         viewModel.titleText = { [weak self] text in
             self?.titlelabel.text = text
         }
-        viewModel.quoteLabel = { [weak self] text in
-            self?.quoteLabel.text = text.first
+        viewModel.quoteItem = { [weak self] item in
+            self?.quoteLabel.text = item.first?.quote
+        }
+        viewModel.heartText = { [weak self] text in
+            self?.heartLabel.text = text
         }
         viewModel.quoteButtonText = { [weak self] text in
             self?.quoteButton.setTitle(text, for: .normal)
