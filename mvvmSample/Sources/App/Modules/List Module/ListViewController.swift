@@ -30,6 +30,14 @@ class ListViewController: UIViewController {
         viewModel.viewDidLoad()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        if let text = UserDefaults.standard.object(forKey: "quoteItem") as? String {
+            titleLabel.text = text
+        } else {
+            titleLabel.text = "no quote yet"
+        }
+    }
+
     private func bind(to viewModel: ListViewModel) {
         viewModel.labelText = { [weak self] text in
             self?.titleLabel.text = text

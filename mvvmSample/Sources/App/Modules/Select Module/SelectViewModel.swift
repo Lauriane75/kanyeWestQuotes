@@ -14,6 +14,8 @@ struct QuoteItem {
 
 protocol SelectViewModelDelegate: class {
     func displayAlert(for type: AlertType)
+
+    func getQuoteItem(quoteItem: QuoteItem)
 }
 
 final class SelectViewModel {
@@ -30,6 +32,7 @@ final class SelectViewModel {
                 guard !self.visibleQuote.isEmpty else { self.delegate?.displayAlert(for: .errorService); return}
                 self.quoteItem?(self.visibleQuote)
             }
+            UserDefaults.standard.set(self.visibleQuote.first?.quote, forKey: "quoteItem")
         }
     }
 
@@ -84,7 +87,8 @@ final class SelectViewModel {
     // MARK: - Private Functions
 
     private func initializeWeather(quoteItem: Quote) {
-        let structVisibleQuote = QuoteItem(quote: quoteItem.quote)
-        self.visibleQuote = [structVisibleQuote]
+        let structQuoteItem = QuoteItem(quote: quoteItem.quote)
+        delegate?.getQuoteItem(quoteItem: structQuoteItem)
+        self.visibleQuote = [structQuoteItem]
     }
 }

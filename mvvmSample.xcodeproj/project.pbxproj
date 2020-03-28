@@ -28,7 +28,6 @@
 		F6D76E30241BC6C00055C70D /* ListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D76E2F241BC6C00055C70D /* ListCoordinator.swift */; };
 		F6D76E33241BCA920055C70D /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D76E32241BCA920055C70D /* Repository.swift */; };
 		F6D76E35241BCB460055C70D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D76E34241BCB460055C70D /* Alert.swift */; };
-		F6DD618A242A74B0008E757C /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DD6189242A74B0008E757C /* CoordinatorProtocol.swift */; };
 		F6DD6191242D13F4008E757C /* QuoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DD6190242D13F4008E757C /* QuoteItem.swift */; };
 		F6EB2B9F242DFAEE00C43BF1 /* ThirdCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB2B9E242DFAEE00C43BF1 /* ThirdCoordinator.swift */; };
 		F6EB2BA3242DFBD300C43BF1 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB2BA2242DFBD300C43BF1 /* FavoriteViewModel.swift */; };
@@ -72,7 +71,6 @@
 		F6D76E2F241BC6C00055C70D /* ListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoordinator.swift; sourceTree = "<group>"; };
 		F6D76E32241BCA920055C70D /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		F6D76E34241BCB460055C70D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		F6DD6189242A74B0008E757C /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		F6DD6190242D13F4008E757C /* QuoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteItem.swift; sourceTree = "<group>"; };
 		F6EB2B9E242DFAEE00C43BF1 /* ThirdCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdCoordinator.swift; sourceTree = "<group>"; };
 		F6EB2BA2242DFBD300C43BF1 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 			children = (
 				F6D76E11241BBCCE0055C70D /* AppCoordinator.swift */,
 				F6EB2BA6242E0B4C00C43BF1 /* MainCoordinator.swift */,
-				F6DD6189242A74B0008E757C /* CoordinatorProtocol.swift */,
 				F6D76E27241BC22D0055C70D /* Screens.swift */,
 				F6D76E2D241BC3E00055C70D /* SelectCoordinator.swift */,
 				F6D76E2F241BC6C00055C70D /* ListCoordinator.swift */,
@@ -358,7 +355,6 @@
 			files = (
 				F6EB2BA5242DFBE100C43BF1 /* FavoriteViewController.swift in Sources */,
 				F6D76E1C241BC0870055C70D /* ListViewModel.swift in Sources */,
-				F6DD618A242A74B0008E757C /* CoordinatorProtocol.swift in Sources */,
 				F6D76E0E241BBC8C0055C70D /* Context.swift in Sources */,
 				F6D76E1A241BC07E0055C70D /* SelectViewModel.swift in Sources */,
 				F6D76E26241BC12E0055C70D /* Token.swift in Sources */,

@@ -34,15 +34,12 @@ final class Repository: RepositoryType {
 
     private let context: Context
     private let token = Token()
-
-    private let httpClientType: HTTPClientType
     private let dataFrom: DataFrom
 
     // MARK: - Initializer
 
-    init(context: Context, httpClientType: HTTPClientType, dataFrom: DataFrom) {
+    init(context: Context, dataFrom: DataFrom) {
         self.context = context
-        self.httpClientType = httpClientType
         self.dataFrom = dataFrom
     }
 
@@ -73,7 +70,6 @@ final class Repository: RepositoryType {
             //            callback(.success(value: quoteItem))
         }
     }
-
 
     // MARK: - Save in coredata
 

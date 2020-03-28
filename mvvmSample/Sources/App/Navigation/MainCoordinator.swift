@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CoordinatorProtocol {
+    func start()
+}
+
 class MainCoordinator {
 
     // MARK: - Properties

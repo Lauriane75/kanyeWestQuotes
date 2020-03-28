@@ -25,7 +25,7 @@ extension Screens {
     func createFirstViewController(delegate: SelectViewModelDelegate?) -> UIViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier:
             "SelectViewController") as! SelectViewController
-        let repository = Repository(context: context, httpClientType: context.client, dataFrom: .server)
+        let repository = Repository(context: context, dataFrom: .server)
         let viewModel = SelectViewModel(repository: repository,
                                        delegate: delegate)
         viewController.viewModel = viewModel
@@ -39,7 +39,7 @@ extension Screens {
     func createSecondViewController(delegate: ListViewModelDelegate?) -> UIViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier:
             "ListViewController") as! ListViewController
-        let repository = Repository(context: context, httpClientType: context.client, dataFrom: .dataBase)
+        let repository = Repository(context: context, dataFrom: .dataBase)
         let viewModel = ListViewModel(repository: repository, delegate: delegate)
         viewController.viewModel = viewModel
         return viewController
@@ -52,7 +52,7 @@ extension Screens {
     func createThirdViewController(delegate: FavoriteViewModelDelegate?) -> UIViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier:
             "FavoriteViewController") as! FavoriteViewController
-        let repository = Repository(context: context, httpClientType: context.client, dataFrom: .dataBase)
+        let repository = Repository(context: context, dataFrom: .dataBase)
         let viewModel = FavoriteViewModel(repository: repository, delegate: delegate)
         viewController.viewModel = viewModel
         return viewController
