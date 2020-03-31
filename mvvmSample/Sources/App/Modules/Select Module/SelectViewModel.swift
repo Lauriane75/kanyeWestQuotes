@@ -14,8 +14,6 @@ struct QuoteItem {
 
 protocol SelectViewModelDelegate: class {
     func displayAlert(for type: AlertType)
-
-    func getQuoteItem(quoteItem: QuoteItem)
 }
 
 final class SelectViewModel {
@@ -32,7 +30,9 @@ final class SelectViewModel {
                 guard !self.visibleQuote.isEmpty else { self.delegate?.displayAlert(for: .errorService); return}
                 self.quoteItem?(self.visibleQuote)
             }
-            UserDefaults.standard.set(self.visibleQuote.first?.quote, forKey: "quoteItem")
+            self.visibleQuote.enumerated().forEach { _, index in
+                UserDefaults.standard.set(index.quote, forKey: "quoteItem")
+            }
         }
     }
 
@@ -66,6 +66,9 @@ final class SelectViewModel {
         heartText?("Add this quote in my favorite")
     }
 
+    func viewWillAppear() {
+     }
+
     // MARK: - Private Functions
 
     func didPressGetQuote() {
@@ -76,11 +79,20 @@ final class SelectViewModel {
             case .success(value: let quoteItem):
                 self.initializeWeather(quoteItem: quoteItem)
             case .error:
-                self.delegate?.displayAlert(for: .errorService)
+                if let item = UserDefaults.standard.object(forKey: "quoteItem") as? String {
+                    let structQuoteItem = QuoteItem(quote: item)
+                    self.visibleQuote = [structQuoteItem]
+                }
             }
         }, onError: { [weak self] error in
-            self?.delegate?.displayAlert(for: .errorService)
-            return
+            guard let self = self else { return }
+            if let item = UserDefaults.standard.object(forKey: "quoteItem") as? String {
+                guard item != "" else {
+                    self.delegate?.displayAlert(for: .errorService)
+                    return }
+                let structQuoteItem = QuoteItem(quote: item)
+                self.visibleQuote = [structQuoteItem]
+            }
         })
     }
 
@@ -88,7 +100,8 @@ final class SelectViewModel {
 
     private func initializeWeather(quoteItem: Quote) {
         let structQuoteItem = QuoteItem(quote: quoteItem.quote)
-        delegate?.getQuoteItem(quoteItem: structQuoteItem)
-        self.visibleQuote = [structQuoteItem]
+        repository.getItem(item: structQuoteItem)
+        repository.saveQuoteItem(quoteItem: structQuoteItem)
+        visibleQuote = [structQuoteItem]
     }
 }

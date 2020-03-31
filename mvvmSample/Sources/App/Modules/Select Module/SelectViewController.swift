@@ -40,8 +40,10 @@ class SelectViewController: UIViewController {
         bind(to: viewModel)
 
         viewModel.viewDidLoad()
+    }
 
-        activityIndicator.isHidden = true
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.viewWillAppear()
     }
 
     private func bind(to viewModel: SelectViewModel) {
@@ -49,7 +51,7 @@ class SelectViewController: UIViewController {
             self?.titlelabel.text = text
         }
         viewModel.quoteItem = { [weak self] item in
-            self?.quoteLabel.text = item.first?.quote
+            self?.quoteLabel.text = item.last?.quote
         }
         viewModel.heartText = { [weak self] text in
             self?.heartLabel.text = text

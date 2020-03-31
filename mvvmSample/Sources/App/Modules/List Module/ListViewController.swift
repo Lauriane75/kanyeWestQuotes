@@ -14,9 +14,13 @@ class ListViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
 
+    @IBOutlet weak var tableView: UITableView!
+
     // MARK: - Properties
 
     var viewModel: ListViewModel!
+
+    private var source = ListTableViewDataSource()
 
     // MARK: - View life cycle
 
@@ -25,22 +29,27 @@ class ListViewController: UIViewController {
 
         navigationBarCustom()
 
+        tableView.delegate = source
+        tableView.dataSource = source
+
         bind(to: viewModel)
 
         viewModel.viewDidLoad()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        if let text = UserDefaults.standard.object(forKey: "quoteItem") as? String {
-            titleLabel.text = text
-        } else {
-            titleLabel.text = "no quote yet"
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.viewWillAppear()
+
+        bind(to: viewModel)
     }
 
     private func bind(to viewModel: ListViewModel) {
         viewModel.labelText = { [weak self] text in
             self?.titleLabel.text = text
+        }
+        viewModel.quoteItems = { [weak self] items in
+            self?.source.update(with: items)
+            self?.tableView.reloadData()
         }
     }
 

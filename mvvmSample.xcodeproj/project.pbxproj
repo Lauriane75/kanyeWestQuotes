@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F663681524313A52005ADB20 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F663681424313A52005ADB20 /* ListTableViewCell.swift */; };
+		F663681724313A61005ADB20 /* ListTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F663681624313A61005ADB20 /* ListTableViewDataSource.swift */; };
 		F67A76B4241BA17E002F6840 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A76B3241BA17E002F6840 /* AppDelegate.swift */; };
 		F67A76BB241BA17E002F6840 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F67A76B9241BA17E002F6840 /* Main.storyboard */; };
 		F67A76BE241BA17E002F6840 /* mvvmSample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F67A76BC241BA17E002F6840 /* mvvmSample.xcdatamodeld */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F663681424313A52005ADB20 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		F663681624313A61005ADB20 /* ListTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewDataSource.swift; sourceTree = "<group>"; };
 		F67A76B0241BA17E002F6840 /* mvvmSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mvvmSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F67A76B3241BA17E002F6840 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F67A76BA241BA17E002F6840 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -96,6 +100,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F66368182431CF7F005ADB20 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F663681624313A61005ADB20 /* ListTableViewDataSource.swift */,
+				F663681424313A52005ADB20 /* ListTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		F67A76A7241BA17D002F6840 = {
 			isa = PBXGroup;
 			children = (
@@ -136,10 +149,10 @@
 		F67A76D8241BB640002F6840 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				F67A76B9241BA17E002F6840 /* Main.storyboard */,
 				F67A76B3241BA17E002F6840 /* AppDelegate.swift */,
 				F6D76E0D241BBC8C0055C70D /* Context.swift */,
 				F6D76E0F241BBCAA0055C70D /* CoredataStack.swift */,
+				F67A76B9241BA17E002F6840 /* Main.storyboard */,
 				F6D76E14241BBFE40055C70D /* App */,
 			);
 			path = Sources;
@@ -168,9 +181,9 @@
 		F6D76E14241BBFE40055C70D /* App */ = {
 			isa = PBXGroup;
 			children = (
+				F6D76E15241BBFFB0055C70D /* Navigation */,
 				F6D76E31241BCA7A0055C70D /* Repository */,
 				F6EB2BA0242DFBB000C43BF1 /* Modules */,
-				F6D76E15241BBFFB0055C70D /* Navigation */,
 				F6D76E16241BC0060055C70D /* Alert */,
 				F6D76E13241BBFD40055C70D /* Network */,
 				F6DD618F242D13DC008E757C /* Model */,
@@ -213,6 +226,7 @@
 			children = (
 				F6D76E1F241BC0AB0055C70D /* ListViewController.swift */,
 				F6D76E1B241BC0870055C70D /* ListViewModel.swift */,
+				F66368182431CF7F005ADB20 /* Cell */,
 			);
 			path = "List Module";
 			sourceTree = "<group>";
@@ -355,6 +369,7 @@
 			files = (
 				F6EB2BA5242DFBE100C43BF1 /* FavoriteViewController.swift in Sources */,
 				F6D76E1C241BC0870055C70D /* ListViewModel.swift in Sources */,
+				F663681524313A52005ADB20 /* ListTableViewCell.swift in Sources */,
 				F6D76E0E241BBC8C0055C70D /* Context.swift in Sources */,
 				F6D76E1A241BC07E0055C70D /* SelectViewModel.swift in Sources */,
 				F6D76E26241BC12E0055C70D /* Token.swift in Sources */,
@@ -370,6 +385,7 @@
 				F67A76B4241BA17E002F6840 /* AppDelegate.swift in Sources */,
 				F6D76E12241BBCCE0055C70D /* AppCoordinator.swift in Sources */,
 				F6D76E28241BC22D0055C70D /* Screens.swift in Sources */,
+				F663681724313A61005ADB20 /* ListTableViewDataSource.swift in Sources */,
 				F6D76E2E241BC3E00055C70D /* SelectCoordinator.swift in Sources */,
 				F67A76BE241BA17E002F6840 /* mvvmSample.xcdatamodeld in Sources */,
 				F6D76E10241BBCAA0055C70D /* CoredataStack.swift in Sources */,

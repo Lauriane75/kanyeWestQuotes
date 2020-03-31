@@ -13,14 +13,16 @@ protocol RepositoryType: class {
     // MARK: - Get from API
 
     func getQuotes(callback: @escaping (Result<Quote>) -> Void, onError: @escaping (String) -> Void)
+
+    // MARK: - Get from cache
+
+    func getItem(item: QuoteItem)
+
     // MARK: - Save in coredata
 
+    func saveQuoteItem(quoteItem: QuoteItem)
 
-    // MARK: - Get from coredata
-
-
-    // MARK: - Delete from coredata
-
+    func getQuoteItems(callback: @escaping ([QuoteItem]) -> Void)
 }
 
 enum DataFrom {
@@ -35,6 +37,8 @@ final class Repository: RepositoryType {
     private let context: Context
     private let token = Token()
     private let dataFrom: DataFrom
+
+    private var quoteItems: [QuoteItem] = []
 
     // MARK: - Initializer
 
@@ -71,10 +75,34 @@ final class Repository: RepositoryType {
         }
     }
 
+    func getItem(item: QuoteItem) {
+        quoteItems.append(item)
+    }
+
     // MARK: - Save in coredata
+
+    func saveQuoteItem(quoteItem: QuoteItem) {
+        let quoteObject = QuoteObject(context: context.stack.context)
+        quoteObject.quoteText = quoteItem.quote
+
+        context.stack.saveContext()
+    }
 
     // MARK: - Get from coredata
 
+    func getQuoteItems(callback: @escaping ([QuoteItem]) -> Void) {
+        let requestQuote: NSFetchRequest<QuoteObject> = QuoteObject.fetchRequest()
+        guard let quoteItems = try? context.stack.context.fetch(requestQuote) else { return }
+        let quote: [QuoteItem] = quoteItems.map { return QuoteItem(object: $0) }
+        callback(quote)
+    }
+
     // MARK: - Delete from coredata
 
+}
+
+extension QuoteItem {
+    init(object: QuoteObject) {
+        self.quote = object.quoteText ?? ""
+    }
 }

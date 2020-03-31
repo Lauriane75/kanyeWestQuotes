@@ -47,10 +47,6 @@ extension SelectCoordinator: CoordinatorProtocol {
 
 
 extension SelectCoordinator: SelectViewModelDelegate {
-    func getQuoteItem(quoteItem: QuoteItem) {
-        
-    }
-
 
     func displayAlert(for type: AlertType) {
         DispatchQueue.main.async {
