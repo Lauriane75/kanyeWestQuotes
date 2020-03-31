@@ -16,15 +16,16 @@ class SelectViewController: UIViewController {
 
     @IBOutlet weak var quoteLabel: UILabel!
 
-    @IBOutlet weak var heartButton: UIButton!
-
     @IBOutlet weak var quoteButton: UIButton!
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    @IBOutlet weak var heartLabel: UILabel!
 
     @IBOutlet weak var quoteView: UIView!
+
+    @IBOutlet weak var heartButton: UIButton!
+
+    @IBOutlet weak var heartLabel: UILabel!
+
     // MARK: - Properties
 
     var viewModel: SelectViewModel!
@@ -74,14 +75,15 @@ class SelectViewController: UIViewController {
     }
 
     // MARK: - View actions
-
-    @IBAction func didPressHeartButton(_ sender: Any) {
-
-    }
     
     @IBAction func didPressQuoteButton(_ sender: Any) {
         viewModel.didPressGetQuote()
     }
+
+    @IBAction func didPressHeartButton(_ sender: Any) {
+        viewModel.addQuoteToFavoriteList()
+    }
+    
     // MARK: - Private Files
 
     fileprivate func navigationBarCustom() {

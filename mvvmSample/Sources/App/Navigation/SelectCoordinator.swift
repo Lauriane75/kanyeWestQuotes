@@ -26,7 +26,7 @@ final class SelectCoordinator {
     }
 }
 
-    // MARK: - CoordinatorProtocol
+// MARK: - CoordinatorProtocol
 
 extension SelectCoordinator: CoordinatorProtocol {
 
@@ -45,12 +45,11 @@ extension SelectCoordinator: CoordinatorProtocol {
     }
 }
 
-
 extension SelectCoordinator: SelectViewModelDelegate {
 
     func displayAlert(for type: AlertType) {
         DispatchQueue.main.async {
-        self.showAlert(for: type)
+            self.showAlert(for: type)
         }
     }
 }

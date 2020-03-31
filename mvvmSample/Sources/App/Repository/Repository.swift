@@ -14,15 +14,18 @@ protocol RepositoryType: class {
 
     func getQuotes(callback: @escaping (Result<Quote>) -> Void, onError: @escaping (String) -> Void)
 
-    // MARK: - Get from cache
+    // MARK: - Get from Core data
 
-    func getItem(item: QuoteItem)
+    func getQuoteItems(callback: @escaping ([QuoteItem]) -> Void)
+
+    func getFavoriteItems(callback: @escaping ([QuoteItem]) -> Void)
 
     // MARK: - Save in coredata
 
+    func saveFavoriteQuote(favoriteItem: QuoteItem)
+
     func saveQuoteItem(quoteItem: QuoteItem)
 
-    func getQuoteItems(callback: @escaping ([QuoteItem]) -> Void)
 }
 
 enum DataFrom {
@@ -70,13 +73,16 @@ final class Repository: RepositoryType {
                                     }
             }
         case .dataBase:
-            print("from database")
-            //            callback(.success(value: quoteItem))
+            var quote = Quote(quote: "")
+            let request: NSFetchRequest<QuoteObject> = QuoteObject.fetchRequest()
+            if let quoteItem = try? self.context.stack.context.fetch(request) {
+                quoteItem.enumerated().forEach { (item, index) in
+                    guard index.quoteText != "" else { return }
+                    quote = Quote(quote: index.quoteText!)
+                    callback(.success(value: quote))
+                }
+            }
         }
-    }
-
-    func getItem(item: QuoteItem) {
-        quoteItems.append(item)
     }
 
     // MARK: - Save in coredata
@@ -84,6 +90,13 @@ final class Repository: RepositoryType {
     func saveQuoteItem(quoteItem: QuoteItem) {
         let quoteObject = QuoteObject(context: context.stack.context)
         quoteObject.quoteText = quoteItem.quote
+
+        context.stack.saveContext()
+    }
+
+    func saveFavoriteQuote(favoriteItem: QuoteItem) {
+        let favoriteObject = FavoriteObject(context: context.stack.context)
+        favoriteObject.favoriteQuote = favoriteItem.quote
 
         context.stack.saveContext()
     }
@@ -97,6 +110,14 @@ final class Repository: RepositoryType {
         callback(quote)
     }
 
+    func getFavoriteItems(callback: @escaping ([QuoteItem]) -> Void) {
+        let requestFavorite: NSFetchRequest<FavoriteObject> = FavoriteObject.fetchRequest()
+        guard let favoriteQuoteItems = try? context.stack.context.fetch(requestFavorite) else { return }
+        let quote: [QuoteItem] = favoriteQuoteItems.map { return QuoteItem(object: $0) }
+        print(quote)
+        callback(quote)
+    }
+
     // MARK: - Delete from coredata
 
 }
@@ -104,5 +125,11 @@ final class Repository: RepositoryType {
 extension QuoteItem {
     init(object: QuoteObject) {
         self.quote = object.quoteText ?? ""
+    }
+}
+
+extension QuoteItem {
+    init(object: FavoriteObject) {
+        self.quote = object.favoriteQuote ?? ""
     }
 }

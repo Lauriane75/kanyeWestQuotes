@@ -27,7 +27,7 @@ extension Screens {
             "SelectViewController") as! SelectViewController
         let repository = Repository(context: context, dataFrom: .server)
         let viewModel = SelectViewModel(repository: repository,
-                                       delegate: delegate)
+                                        delegate: delegate)
         viewController.viewModel = viewModel
         return viewController
     }
@@ -58,7 +58,6 @@ extension Screens {
         return viewController
     }
 }
-
 
 // MARK: - Alert
 

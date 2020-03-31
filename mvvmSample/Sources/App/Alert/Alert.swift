@@ -10,6 +10,7 @@ import Foundation
 
 enum AlertType {
     case errorService
+    case noQuote
 }
 
 struct Alert {
@@ -22,6 +23,8 @@ extension Alert {
         switch type {
         case .errorService:
             self = Alert(title: "Error", message: "No internet connection")
+        case .noQuote:
+            self = Alert(title: "Error", message: "No quote yet")
         }
     }
 }

@@ -26,7 +26,7 @@ final class ListCoordinator {
     }
 }
 
-    // MARK: - CoordinatorProtocol
+// MARK: - CoordinatorProtocol
 
 extension ListCoordinator: CoordinatorProtocol {
 

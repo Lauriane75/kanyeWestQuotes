@@ -12,11 +12,13 @@ class FavoriteViewController: UIViewController {
 
     // MARK: - Outlet
 
-    @IBOutlet weak var titleLabel: UILabel!
-    
+    @IBOutlet weak var collectionView: UICollectionView!
+
     // MARK: - Properties
 
     var viewModel: FavoriteViewModel!
+
+    private lazy var collectionDataSource = FavoriteCollectionDataSource()
 
     // MARK: - View life cycle
 
@@ -25,19 +27,26 @@ class FavoriteViewController: UIViewController {
 
         navigationBarCustom()
 
+        collectionView.dataSource = collectionDataSource
+
         bind(to: viewModel)
 
         viewModel.viewDidLoad()
     }
 
-    private func bind(to viewModel: FavoriteViewModel) {
-        viewModel.labelText = { [weak self] text in
-            self?.titleLabel.text = text
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.viewWillAppear()
+        
+        bind(to: viewModel)
     }
 
-    // MARK: - View actions
-
+    private func bind(to viewModel: FavoriteViewModel) {
+        viewModel.favoriteItems = { [weak self] items in
+          guard let self = self else { return }
+            self.collectionDataSource.update(with: items)
+            self.collectionView.reloadData()
+        }
+    }
 
     // MARK: - Private Files
 

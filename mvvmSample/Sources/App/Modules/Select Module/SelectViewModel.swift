@@ -63,11 +63,17 @@ final class SelectViewModel {
         titleText?("What's the quote of the day ?")
         navBarTitle?("Select a quote")
         quoteButtonText?("Get quote")
-        heartText?("Add this quote in my favorite")
+        heartText?("Add this quote to my favorites")
+        didPressGetQuote()
     }
 
     func viewWillAppear() {
-     }
+    }
+
+    func addQuoteToFavoriteList() {
+        guard let favoriteQuote = visibleQuote.last else { return }
+        saveInDataBase(favoriteQuote)
+    }
 
     // MARK: - Private Functions
 
@@ -100,8 +106,11 @@ final class SelectViewModel {
 
     private func initializeWeather(quoteItem: Quote) {
         let structQuoteItem = QuoteItem(quote: quoteItem.quote)
-        repository.getItem(item: structQuoteItem)
         repository.saveQuoteItem(quoteItem: structQuoteItem)
         visibleQuote = [structQuoteItem]
+    }
+
+    private func saveInDataBase(_ item: QuoteItem) {
+        self.repository.saveFavoriteQuote(favoriteItem: item)
     }
 }

@@ -20,6 +20,15 @@ final class FavoriteViewModel {
 
     private weak var delegate: FavoriteViewModelDelegate?
 
+    private var favoritQuote: [QuoteItem] = [] {
+         didSet {
+             guard !favoritQuote.isEmpty else {
+                 delegate?.displayAlert(for: .errorService)
+                 return }
+             favoriteItems?(favoritQuote)
+         }
+     }
+
     // MARK: - Initializer
 
     init(repository: RepositoryType, delegate: FavoriteViewModelDelegate?) {
@@ -33,14 +42,33 @@ final class FavoriteViewModel {
 
     var navBarTitle: ((String) -> Void)?
 
+    var favoriteItems: (([QuoteItem]) -> Void)?
+
     // MARK: - Input
 
     func viewDidLoad() {
-        labelText?("This is the favorite view")
         navBarTitle?("Favorite quotes")
+        getFavoriteQuotes()
     }
 
+    func viewWillAppear() {
+         getFavoriteQuotes()
+     }
+
     // MARK: - Private Functions
+
+    private func getFavoriteQuotes() {
+        repository.getFavoriteItems { [weak self] items in
+            print(items)
+            guard let self = self else { return }
+            guard !items.isEmpty else {
+                self.delegate?.displayAlert(for: .noQuote)
+                return
+            }
+            self.favoriteItems?(items)
+            self.favoritQuote = items
+        }
+    }
 }
 
 

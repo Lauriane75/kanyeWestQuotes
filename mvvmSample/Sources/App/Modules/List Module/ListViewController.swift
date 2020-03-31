@@ -54,8 +54,8 @@ class ListViewController: UIViewController {
     }
 
     // MARK: - View actions
-
-
+    
+    
     // MARK: - Private Files
 
     fileprivate func navigationBarCustom() {
